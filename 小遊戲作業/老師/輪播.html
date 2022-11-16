@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #gallery {
+      width: 400px;
+      height: 300px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #imgs {
+      position: absolute;
+    }
+
+    img {
+      float: left;
+      width: 400px;
+      height: 300px;
+    }
+  </style>
+</head>
+<body>
+  <div id="gallery">
+    <div id="imgs">
+      <img src="./0551.jpg" alt="">
+      <img src="./0552.jpg" alt="">
+      <img src="./0553.jpg" alt="">
+      <img src="./0554.jpg" alt="">
+      <img src="./0555.jpg" alt="">
+    </div>
+  </div>
+  <input type="button" value="&lt;" id="btn-left">
+  <input type="button" value="&gt;" id="btn-right">
+  <script src="./jquery-3.6.1.min.js"></script>
+  <script>
+    let now = 0
+    const total = $('img').length
+    $('#imgs').css('width', total * 400 + 'px')
+
+    $('#btn-right').click(function () {
+      // now     now + 1     total
+      // 0       1           5
+      // 1       2           5
+      // 2       3           5
+      // 3       4           5
+      // 4       5           5
+      if (now + 1 < total) {
+        now++
+        const left = now * 400 * -1
+        $('#imgs').stop(true, true).animate({ left: left - 25 + 'px' }).animate({ left: left + 'px' })
+      }
+    })
+
+    $('#btn-left').click(function () {
+      // now     now - 1
+      // 4       3      
+      // 3       2      
+      // 2       1      
+      // 1       0      
+      // 0       -1      
+      if (now - 1 >= 0) {
+        now--
+        const left = now * 400 * -1
+        $('#imgs').stop(true, true).animate({ left: left + 25 + 'px' }).animate({ left: left + 'px' })
+      }
+    })
+  </script>
+</body>
+</html>
